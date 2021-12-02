@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../models/result_mbitcoin.dart';
 import '../services/mbitcoin_api.dart';
 
+/* import 'package:flushbar/flushbar.dart'; */
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -51,6 +52,11 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
+// FLUSHBAR
+/*   final List<Flushbar> flushBars = [];
+  var titleSnackBar = '';
+  var massageSnackBar = ''; */
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,8 +66,8 @@ class _HomePageState extends State<HomePage> {
             child: const Text(
               'Cryptocurrency Converter',
               style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 28,
+                  color: Colors.black87,
+                  fontSize: 30,
                   fontWeight: FontWeight.bold),
             ),
             label: 'Cryptocurrency Converter',
@@ -76,28 +82,30 @@ class _HomePageState extends State<HomePage> {
             case ConnectionState.none:
             case ConnectionState.waiting:
               return Semantics(
-                  child: const Text('Carregando dados da API...',
-                      style: TextStyle(fontSize: 20),
+                  child: const Text('\n       Carregando dados da API...',
+                      style:
+                          TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center),
                   label: 'Carregando dados da API');
             default:
               if (snapshot.hasError) {
                 return Semantics(
                     child: const Text('Erro ao carregar os dados da API!',
-                        style: TextStyle(fontSize: 20)),
+                        style: TextStyle(
+                            fontSize: 26, fontWeight: FontWeight.bold)),
                     label: 'Erro ao carregar os dados da API');
               } else {
                 loadCoins(snapshot.data);
                 return SingleChildScrollView(
                   padding: const EdgeInsets.all(30.0),
                   child: Container(
-                    padding: const EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 1),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         Icon(
                           Icons.attach_money_rounded,
-                          size: 100,
+                          size: 120,
                         ),
                         const SizedBox(height: 40),
                         Semantics(
@@ -295,4 +303,35 @@ class _HomePageState extends State<HomePage> {
     double coin = double.parse(text);
     brlController.text = findCotation(1, usdc, coin).toStringAsFixed(2);
   }
+
+  // FLUSHBAR
+  /* void showTopSnackBar(BuildContext context) => show(
+        context,
+        Flushbar(
+          icon: Icon(
+            Icons.error,
+            size: 40,
+            color: Colors.red,
+          ),
+          shouldIconPulse: false,
+          title: titleSnackBar,
+          message: massageSnackBar,
+          onTap: (_) {
+            print('Clicked bar');
+          },
+          duration: Duration(seconds: 3),
+          flushbarPosition: FlushbarPosition.TOP,
+          margin: EdgeInsets.fromLTRB(8, kToolbarHeight + 8, 8, 0),
+        ),
+      );
+
+  Future show(BuildContext context, Flushbar newFlushBar) async {
+    await Future.wait(flushBars.map((flushBar) => flushBar.dismiss()).toList());
+    flushBars.clear();
+
+    newFlushBar.show(context);
+    flushBars.add(newFlushBar);
+  }
+
+ */
 }
