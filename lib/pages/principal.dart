@@ -55,10 +55,16 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text(
-            'Cryptocurrency Converter',
-            style: TextStyle(
-                color: Colors.black, fontSize: 28, fontWeight: FontWeight.bold),
+          // SEMANTICS UTILIZADO PARA A LEITURA POR VOZ (ACESSIBILIDADE)
+          title: Semantics(
+            child: const Text(
+              'Cryptocurrency Converter',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold),
+            ),
+            label: 'Cryptocurrency Converter',
           ),
           centerTitle: true,
           toolbarHeight: 70,
@@ -69,7 +75,6 @@ class _HomePageState extends State<HomePage> {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
             case ConnectionState.waiting:
-              // SEMANTICS UTILIZADO PARA A LEITURA POR VOZ (ACESSIBILIDADE)
               return Semantics(
                   child: const Text('Carregando dados da API...',
                       style: TextStyle(fontSize: 20),
@@ -95,25 +100,31 @@ class _HomePageState extends State<HomePage> {
                           size: 100,
                         ),
                         const SizedBox(height: 40),
-                        Text('Selecione a Criptomoeda:',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                height: 1.0)),
+                        Semantics(
+                            child: Text('Selecione a Criptomoeda:',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1.0)),
+                            label: 'Escolha uma Criptomoeda'),
                         select(),
                         const SizedBox(height: 30),
-                        Text('Criptomoeda:',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                height: 3.0)),
+                        Semantics(
+                            child: Text('Criptomoeda:',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    height: 3.0)),
+                            label: 'Criptomoeda escolhida'),
                         showValue(selectController),
                         //const SizedBox(height: 5),
-                        Text('Valor da Criptomoeda em R\$:',
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                height: 3.0)),
+                        Semantics(
+                            child: Text('Valor da Criptomoeda em R\$:',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    height: 3.0)),
+                            label: 'Valor da Criptomoeda em reais'),
                         showValue('BRL'),
                       ],
                     ),
@@ -196,7 +207,7 @@ class _HomePageState extends State<HomePage> {
       } else {
         return Semantics(
             child: const Text('Erro! Tente novamente!'),
-            label: 'Erro! Tente novamente!');
+            label: 'Erro Tente novamente');
       }
     }
   }
