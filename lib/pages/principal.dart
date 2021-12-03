@@ -4,8 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../models/result_mbitcoin.dart';
 import '../services/mbitcoin_api.dart';
+import 'package:share/share.dart';
 
-/* import 'package:flushbar/flushbar.dart'; */
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -52,29 +52,38 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
-// FLUSHBAR
-/*   final List<Flushbar> flushBars = [];
-  var titleSnackBar = '';
-  var massageSnackBar = ''; */
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          // SEMANTICS UTILIZADO PARA A LEITURA POR VOZ (ACESSIBILIDADE)
-          title: Semantics(
-            child: const Text(
-              'Cryptocurrency Converter',
-              style: TextStyle(
-                  color: Colors.black87,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold),
-            ),
-            label: 'Cryptocurrency Converter',
+        // SEMANTICS UTILIZADO PARA A LEITURA POR VOZ (ACESSIBILIDADE)
+        title: Semantics(
+          child: const Text(
+            'Cryptocurrency Converter',
+            style: TextStyle(
+                color: Colors.black87,
+                fontSize: 25,
+                fontWeight: FontWeight.bold),
           ),
-          centerTitle: true,
-          toolbarHeight: 70,
-          backgroundColor: Colors.green[500]),
+          label: 'Cryptocurrency Converter',
+        ),
+        centerTitle: true,
+        toolbarHeight: 70,
+        backgroundColor: Colors.green[500],
+        // SHARE
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(
+              Icons.share,
+              color: Colors.black87,
+              size: 30,
+            ),
+            onPressed: () {
+              _share(context);
+            },
+          )
+        ],
+      ),
       body: FutureBuilder<List>(
         future: getData(),
         builder: (context, snapshot) {
@@ -177,14 +186,6 @@ class _HomePageState extends State<HomePage> {
       }).toList(),
     ));
   }
-
-  /* Widget _circularLoading() {
-    return Container(
-      height: 15.0,
-      width: 15.0,
-      child: CircularProgressIndicator(),
-    );
-  } */
 
 // SET PARA DEFINIR O VALOR QUE COMEÇA NO TEXTFIELD
   void _erase() {
@@ -304,34 +305,17 @@ class _HomePageState extends State<HomePage> {
     brlController.text = findCotation(1, usdc, coin).toStringAsFixed(2);
   }
 
-  // FLUSHBAR
-  /* void showTopSnackBar(BuildContext context) => show(
-        context,
-        Flushbar(
-          icon: Icon(
-            Icons.error,
-            size: 40,
-            color: Colors.red,
-          ),
-          shouldIconPulse: false,
-          title: titleSnackBar,
-          message: massageSnackBar,
-          onTap: (_) {
-            print('Clicked bar');
-          },
-          duration: Duration(seconds: 3),
-          flushbarPosition: FlushbarPosition.TOP,
-          margin: EdgeInsets.fromLTRB(8, kToolbarHeight + 8, 8, 0),
-        ),
-      );
-
-  Future show(BuildContext context, Flushbar newFlushBar) async {
-    await Future.wait(flushBars.map((flushBar) => flushBar.dismiss()).toList());
-    flushBars.clear();
-
-    newFlushBar.show(context);
-    flushBars.add(newFlushBar);
+// SHARE -> COMPARTILHAR OS VALORES DAS MOEDAS
+  void _share(BuildContext context) {
+    if (brlController.text.isEmpty ||
+        btcController.text.isEmpty ||
+        ltcController.text.isEmpty ||
+        uniController.text.isEmpty ||
+        adaController.text.isEmpty ||
+        usdcController.text.isEmpty) {
+    } else {
+      Share.share(
+          "BRL: ${brlController.text} / BTC: ${btcController.text} / LTC: ${ltcController.text} / UNI: ${uniController.text} / ADA: ${adaController.text} / USDC: ${usdcController.text}");
+    }
   }
-
- */
 }

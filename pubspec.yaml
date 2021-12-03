@@ -35,6 +35,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   http: ^0.13.4
   flushbar: ^1.10.4
+  share: ^2.0.4
 
 dev_dependencies:
   flutter_test:
