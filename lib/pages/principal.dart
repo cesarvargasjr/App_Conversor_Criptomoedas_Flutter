@@ -1,5 +1,4 @@
 // ignore_for_file: prefer_const_constructors
-//import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../models/result_mbitcoin.dart';
@@ -31,7 +30,7 @@ double findCotation(val1, val2, val3) {
   return cotation;
 }
 
-// LISTA DAS CRIPTOMOEDAS:
+// LISTA DAS CRIPTOMOEDAS
 List<String> coins = ['BTC', 'LTC', 'ADA', 'UNI', 'USDC'];
 
 // BUSCA DOS DADOS DE CADA CRITOMOEDA NA API
@@ -43,7 +42,7 @@ Future<List> getData() async {
   }).toList();
 }
 
-// SET PARA COMEÇAR COM O "BTC" SELECIONADO
+// SET PARA COMEÇAR COM O "BTC" SELECIONADO NO CAMPO DE CRIPTOMOEDAS
 class _HomePageState extends State<HomePage> {
   String selectController = 'BTC';
 
@@ -70,7 +69,7 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         toolbarHeight: 70,
         backgroundColor: Colors.green[500],
-        // SHARE
+        // SHARE -> COMPARTILHAR OS VALORES DAS MOEDAS PARA APP EXTERNO
         actions: <Widget>[
           IconButton(
             icon: const Icon(
@@ -134,7 +133,6 @@ class _HomePageState extends State<HomePage> {
                                     height: 3.0)),
                             label: 'Criptomoeda escolhida'),
                         showValue(selectController),
-                        //const SizedBox(height: 5),
                         Semantics(
                             child: Text('Valor da Criptomoeda em R\$:',
                                 style: TextStyle(
@@ -196,10 +194,10 @@ class _HomePageState extends State<HomePage> {
     usdcController.text = 1.toStringAsFixed(6);
   }
 
+// VALIDAÇÃO NA ESCOLHA DAS CRITOMOEDAS
   Widget showValue(String coin) {
     _erase();
 
-// VALIDAÇÃO NA ESCOLHA DAS CRITOMOEDAS
     if (coin == 'BRL') {
       return showValuesInField(brlController, 'BRL ', _realChanged);
     } else {
@@ -305,7 +303,7 @@ class _HomePageState extends State<HomePage> {
     brlController.text = findCotation(1, usdc, coin).toStringAsFixed(2);
   }
 
-// SHARE -> COMPARTILHAR OS VALORES DAS MOEDAS
+// SHARE -> COMPARTILHAR OS VALORES DAS MOEDAS PARA APP EXTERNO
   void _share(BuildContext context) {
     if (brlController.text.isEmpty ||
         btcController.text.isEmpty ||

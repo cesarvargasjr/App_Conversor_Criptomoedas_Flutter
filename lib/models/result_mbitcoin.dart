@@ -1,8 +1,8 @@
 // To parse this JSON data, do
 //
 // final welcome = welcomeFromMap(jsonString);
-//import 'package:meta/meta.dart';
-//import 'dart:convert';
+// import 'package:meta/meta.dart';
+// import 'dart:convert';
 
 class ResultApi {
   late Ticker ticker;
