@@ -10,3 +10,4 @@ Principais características da aplicação:
 - Cálculo e funções para mostrar quanto vale o valor digitado da criptomoeda em BRL
 - Botão Share para compartilhar os dados em algum app externo
 
+![Conversor de criptomoedas](https://user-images.githubusercontent.com/72532360/144530478-a6a13b9d-65e1-45aa-8238-55cb34baa195.png)
